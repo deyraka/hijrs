@@ -36,9 +36,10 @@ class CreateTblComplaintsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_complaint');
         Schema::table('tbl_complaint', function (Blueprint $table) {
             $table->dropSoftDeletes();
         });
+        Schema::dropIfExists('tbl_complaint');
+
     }
 }

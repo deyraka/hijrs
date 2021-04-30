@@ -40,9 +40,10 @@ class CreateMstrBmnsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mstr_bmn');
         Schema::table('mstr_bmn', function (Blueprint $table) {
             $table->dropSoftDeletes();
         });
+        Schema::dropIfExists('mstr_bmn');
+
     }
 }

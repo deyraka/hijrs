@@ -34,9 +34,10 @@ class CreateTblHistoryMaintenancesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_history_maintenance');
         Schema::table('tbl_history_maintenance', function (Blueprint $table) {
             $table->dropSoftDeletes();
         });
+        Schema::dropIfExists('tbl_history_maintenance');
+
     }
 }

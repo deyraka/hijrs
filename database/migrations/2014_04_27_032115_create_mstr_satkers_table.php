@@ -29,9 +29,10 @@ class CreateMstrSatkersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mstr_satker');
         Schema::table('mstr_satker', function (Blueprint $table) {
             $table->dropSoftDeletes();
         });
+        Schema::dropIfExists('mstr_satker');
+
     }
 }

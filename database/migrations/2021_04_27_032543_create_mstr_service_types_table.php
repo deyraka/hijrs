@@ -30,9 +30,10 @@ class CreateMstrServiceTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mstr_service_type');
         Schema::table('mstr_service_type', function (Blueprint $table) {
             $table->dropSoftDeletes();
         });
+        Schema::dropIfExists('mstr_service_type');
+
     }
 }
