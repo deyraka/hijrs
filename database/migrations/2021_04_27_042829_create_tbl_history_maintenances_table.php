@@ -23,6 +23,7 @@ class CreateTblHistoryMaintenancesTable extends Migration
             $table->char('handled_by', 9)->nullable();
             $table->foreign('handled_by')->references('id')->on('tbl_user')->onUpdate('cascade')->onDelete('no action');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -34,5 +35,8 @@ class CreateTblHistoryMaintenancesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('tbl_history_maintenance');
+        Schema::table('tbl_history_maintenance', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
     }
 }

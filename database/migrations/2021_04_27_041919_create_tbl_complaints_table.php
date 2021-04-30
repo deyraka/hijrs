@@ -25,6 +25,7 @@ class CreateTblComplaintsTable extends Migration
             $table->foreign('created_by')->references('id')->on('tbl_user')->onUpdate('cascade')->onDelete('no action');
             $table->string('memo_file', 100);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -36,5 +37,8 @@ class CreateTblComplaintsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('tbl_complaint');
+        Schema::table('tbl_complaint', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
     }
 }

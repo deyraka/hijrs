@@ -18,6 +18,7 @@ class CreateMstrUkersTable extends Migration
             $table->primary('id');
             $table->string('deskripsi', 50);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -29,5 +30,8 @@ class CreateMstrUkersTable extends Migration
     public function down()
     {
         Schema::dropIfExists('mstr_uker');
+        Schema::table('mstr_uker', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
     }
 }

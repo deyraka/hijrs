@@ -19,6 +19,7 @@ class CreateMstrServiceTypesTable extends Migration
             $table->string('judul', 50);
             $table->text('deskripsi')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -30,5 +31,8 @@ class CreateMstrServiceTypesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('mstr_service_type');
+        Schema::table('mstr_service_type', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
     }
 }

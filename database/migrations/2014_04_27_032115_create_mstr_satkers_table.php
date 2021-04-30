@@ -18,6 +18,7 @@ class CreateMstrSatkersTable extends Migration
             $table->primary('id');
             $table->string('deskripsi', 50);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -29,5 +30,8 @@ class CreateMstrSatkersTable extends Migration
     public function down()
     {
         Schema::dropIfExists('mstr_satker');
+        Schema::table('mstr_satker', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
     }
 }

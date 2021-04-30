@@ -27,10 +27,7 @@ class CreateUsersTable extends Migration
             $table->string('no_hp', 12)->nullable(true);
             $table->rememberToken();
             $table->timestamps();
-        });
-
-        Schema::table('tbl_user', function (Blueprint $table) {
-        
+            $table->softDeletes();
         });
     }
 
@@ -42,5 +39,8 @@ class CreateUsersTable extends Migration
     public function down()
     {
         Schema::dropIfExists('tbl_user');
+        Schema::table('tbl_user', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
     }
 }

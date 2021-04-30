@@ -29,6 +29,7 @@ class CreateMstrBmnsTable extends Migration
             $table->string('sn', 50)->nullable(true);
             $table->char('kondisi', 1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -40,5 +41,8 @@ class CreateMstrBmnsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('mstr_bmn');
+        Schema::table('mstr_bmn', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
     }
 }
