@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('nama', 50)->nullable(true);
             $table->char('satker', 5)->nullable(true);
             $table->foreign('satker')->references('id')->on('mstr_satker')->onUpdate('cascade')->onDelete('no action');
-            $table->char('uker', 3)->nullable(true);
+            $table->char('uker', 2)->nullable(true);
             $table->foreign('uker')->references('id')->on('mstr_uker')->onUpdate('cascade')->onDelete('no action');
             $table->string('email', 50)->unique()->nullable(true);
             $table->string('no_hp', 12)->nullable(true);

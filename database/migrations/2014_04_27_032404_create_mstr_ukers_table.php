@@ -14,7 +14,7 @@ class CreateMstrUkersTable extends Migration
     public function up()
     {
         Schema::create('mstr_uker', function (Blueprint $table) {
-            $table->char('id', 3);
+            $table->char('id', 2);
             $table->primary('id');
             $table->string('deskripsi', 50);
             $table->timestamps();

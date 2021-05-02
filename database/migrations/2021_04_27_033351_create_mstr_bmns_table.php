@@ -21,7 +21,7 @@ class CreateMstrBmnsTable extends Migration
             $table->string('merk', 20);
             $table->string('type', 50);
             $table->char('thn_perolehan', 4);
-            $table->char('lokasi_uker', 3)->nullable(true);
+            $table->char('lokasi_uker', 2)->nullable(true);
             $table->foreign('lokasi_uker')->references('id')->on('mstr_uker')->onUpdate('cascade')->onDelete('no action');
             $table->char('pemegang', 9)->nullable(true);
             $table->foreign('pemegang')->references('id')->on('tbl_user')->onUpdate('cascade')->onDelete('no action');
