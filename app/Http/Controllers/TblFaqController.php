@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MstrSatker; //add this
-use App\Http\Resources\MstrSatkerResource; //add this
+use App\Models\TblFaq;
 use Illuminate\Http\Request;
+use App\Http\Resources\TblFaqResource; //add this
 use Illuminate\Support\Facades\Validator; //add this
-use App\Http\Controllers\Controller; //add this
+use App\Http\Controllers\Controller;  // add this
 
-class MstrSatkerController extends Controller
+
+class TblFaqController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +18,10 @@ class MstrSatkerController extends Controller
      */
     public function index()
     {
-        $satkers = MstrSatker::all();
+        $faq = TblFaq::all();
         return response([
-            'data' => MstrSatkerResource::collection($satkers),
-            'message' => 'Get All Satker Success'
+            'data' => TblFaqResource::collection($faq),
+            'message' => 'Success'
         ], 200);
     }
 
@@ -34,8 +35,8 @@ class MstrSatkerController extends Controller
     {
         $data = $request->all();
         $validator = Validator::make($data,[
-            'id'=>'required|max:5',
-            'deskripsi'=>'required|max:50'
+            'judul'=>'required|max:150',
+            'isi'=>'required',
         ]);
         
         if($validator->fails()){
@@ -45,27 +46,25 @@ class MstrSatkerController extends Controller
             ]);
         }
 
-        $new_satker = MstrSatker::create($data);
-        // $get_new_satker = MstrSatker::where('id', $request->input('id'))->get();
+        $new_faq = TblFaq::create($data);
 
         return response([
-            'data'=> new MstrSatkerResource($new_satker),
-            // 'satker'=> $get_new_satker,
-            'message'=> 'Storing Data Success'
+            'data'=> new TblFaqResource($new_faq),
+            'message'=> 'Success'
         ], 200);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\MstrSatker  $mstrSatker
+     * @param  \App\Models\TblFaq  $tblFaq
      * @return \Illuminate\Http\Response
      */
-    public function show(MstrSatker $satker)
+    public function show(TblFaq $faq)
     {
         return response([
-            'data'=> new MstrSatkerResource($satker),
-            'message'=> 'Showing Data Success'
+            'data'=> new TblFaqTResource($faq),
+            'message'=> 'Success'
         ], 200);
     }
 
@@ -73,29 +72,29 @@ class MstrSatkerController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\MstrSatker  $mstrSatker
+     * @param  \App\Models\TblFaq  $tblFaq
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, MstrSatker $satker)
+    public function update(Request $request, TblFaq $faq)
     {
-        $satker->update($request->all());
+        $faq->update($request->all());
         return response([
-            'data' => new MstrSatkerResource($satker),
-            'message' => 'Updating Data Success'
+            'data' => new TblFaqResource($faq),
+            'message' => 'Success'
         ], 200);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\MstrSatker  $mstrSatker
+     * @param  \App\Models\TblFaq  $tblFaq
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MstrSatker $satker)
+    public function destroy(TblFaq $faq)
     {
-        $satker->delete();
+        $faq->delete();
         return response([
-            'message' => 'Deleting Success'
+            'message' => 'Success'
         ], 200);
     }
 }

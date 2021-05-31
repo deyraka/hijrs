@@ -5,6 +5,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MstrSatkerController;
 use App\Http\Controllers\MstrUkerController;
+use App\Http\Controllers\MstrServiceTypeController;
+use App\Http\Controllers\TblFaqController;
+use App\Http\Controllers\TblNewsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,10 +32,14 @@ Route::group(['prefix'=>'v1'], function(){
     
     /* routes for accessing apiResources with many controller*/
     Route::middleware(['auth:api'])->group(function () {
-        Route::get('/logout', [UserController::class,'logout'])->middleware('auth:api');
+        Route::get('/logout', [UserController::class,'logout']);
         Route::apiResources([
             '/satker' => MstrSatkerController::class,
             '/uker' => MstrUkerController::class,
+            '/serviceType' => MstrServiceTypeController::class,
+            '/faq' => TblFaqController::class,
+            '/news' => TblNewsController::class,
         ]);
+        Route::get('/serviceOption/{type}', [MstrServiceTypeController::class, 'listByType']);
     });
 });

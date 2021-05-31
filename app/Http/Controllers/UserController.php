@@ -18,7 +18,8 @@ class UserController extends Controller
             return response()->json([
               'success' => true,
               'token' => $success,
-              'user' => $user
+              'user' => $user,
+              'message' => 'Login success'
             ], 200);
         } else {
        //if authentication is unsuccessfull, notice how I return json parameters

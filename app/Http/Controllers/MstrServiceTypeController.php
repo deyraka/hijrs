@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MstrSatker; //add this
-use App\Http\Resources\MstrSatkerResource; //add this
+use App\Models\MstrServiceType;
+use App\Http\Resources\MstrServiceTypeResource; //add this
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator; //add this
 use App\Http\Controllers\Controller; //add this
 
-class MstrSatkerController extends Controller
+class MstrServiceTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +17,28 @@ class MstrSatkerController extends Controller
      */
     public function index()
     {
-        $satkers = MstrSatker::all();
+        $services = MstrServiceType::all();
         return response([
-            'data' => MstrSatkerResource::collection($satkers),
+            'data' => MstrServiceTypeResource::collection($services),
             'message' => 'Get All Satker Success'
+        ], 200);
+    }
+
+    /**
+     * Display a listing of the resource based on selected type.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function listByType($type)
+    {
+        $services = MstrServiceType::where('jenis', $type)->get();
+        /* Contoh dengan pagination */
+        /* $services = MstrServiceType::where('jenis', $type)
+                        ->paginate(3); */
+
+        return response()->json([
+            'success' => true,
+            'data' => $services,
         ], 200);
     }
 
@@ -34,8 +52,9 @@ class MstrSatkerController extends Controller
     {
         $data = $request->all();
         $validator = Validator::make($data,[
-            'id'=>'required|max:5',
-            'deskripsi'=>'required|max:50'
+            'jenis'=>'required|max:1',
+            'judul'=>'required|max:50',
+            'deskripsi'=>'required'
         ]);
         
         if($validator->fails()){
@@ -45,12 +64,12 @@ class MstrSatkerController extends Controller
             ]);
         }
 
-        $new_satker = MstrSatker::create($data);
+        $new_service_type = MstrServiceType::create($data);
         // $get_new_satker = MstrSatker::where('id', $request->input('id'))->get();
 
         return response([
-            'data'=> new MstrSatkerResource($new_satker),
-            // 'satker'=> $get_new_satker,
+            'data'=> new MstrServiceTypeResource($new_service_type),
+            // 'serviceType'=> $get_new_satker,
             'message'=> 'Storing Data Success'
         ], 200);
     }
@@ -58,13 +77,13 @@ class MstrSatkerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\MstrSatker  $mstrSatker
+     * @param  \App\Models\MstrServiceType  $mstrServiceType
      * @return \Illuminate\Http\Response
      */
-    public function show(MstrSatker $satker)
+    public function show(MstrServiceType $serviceType)
     {
         return response([
-            'data'=> new MstrSatkerResource($satker),
+            'data'=> new MstrServiceTypeResource($serviceType),
             'message'=> 'Showing Data Success'
         ], 200);
     }
@@ -73,14 +92,14 @@ class MstrSatkerController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\MstrSatker  $mstrSatker
+     * @param  \App\Models\MstrServiceType  $mstrServiceType
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, MstrSatker $satker)
+    public function update(Request $request, MstrServiceType $serviceType)
     {
-        $satker->update($request->all());
+        $serviceType->update($request->all());
         return response([
-            'data' => new MstrSatkerResource($satker),
+            'data' => new MstrServiceTypeResource($serviceType),
             'message' => 'Updating Data Success'
         ], 200);
     }
@@ -88,12 +107,12 @@ class MstrSatkerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\MstrSatker  $mstrSatker
+     * @param  \App\Models\MstrServiceType  $mstrServiceType
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MstrSatker $satker)
+    public function destroy(MstrServiceType $serviceType)
     {
-        $satker->delete();
+        $serviceType->delete();
         return response([
             'message' => 'Deleting Success'
         ], 200);

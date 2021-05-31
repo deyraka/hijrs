@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class MstrServiceType extends Model
+class TblNews extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -15,7 +15,7 @@ class MstrServiceType extends Model
      *
      * @var string
      */
-    protected $table = 'mstr_service_type';
+    protected $table = 'tbl_news';
 
     /**
      * The attributes that are mass assignable.
@@ -23,9 +23,9 @@ class MstrServiceType extends Model
      * @var array
      */
     protected $fillable = [
-        'jenis',
+        'url_img',
         'judul',
-        'deskripsi',
+        'isi',
     ];
 
     /**

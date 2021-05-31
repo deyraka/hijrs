@@ -19,7 +19,7 @@ class MstrUkerController extends Controller
     {
         $ukers = MstrUker::all();
         return response([
-            'uker' => MstrUkerResource::collection($ukers),
+            'data' => MstrUkerResource::collection($ukers),
             'message' => 'Get All Uker Success'
         ], 200);
     }
@@ -48,7 +48,7 @@ class MstrUkerController extends Controller
         $new_uker = MstrUker::create($data);
 
         return response([
-            'uker'=> new MstrUkerResource($new_uker),
+            'data'=> new MstrUkerResource($new_uker),
             'message'=> 'Storing Data Success'
         ], 200);
     }
@@ -62,7 +62,7 @@ class MstrUkerController extends Controller
     public function show(MstrUker $uker)
     {
         return response([
-            'uker'=> new MstrUkerResource($uker),
+            'data'=> new MstrUkerResource($uker),
             'message'=> 'Showing Data Success'
         ], 200);
     }
@@ -78,7 +78,7 @@ class MstrUkerController extends Controller
     {
         $uker->update($request->all());
         return response([
-            'uker' => new MstrUkerResource($uker),
+            'data' => new MstrUkerResource($uker),
             'message' => 'Updating Data Success'
         ], 200);
     }
