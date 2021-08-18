@@ -63,7 +63,7 @@ class TblNewsController extends Controller
     public function show(TblNews $news)
     {
         return response([
-            'data'=> new TblNewsTResource($news),
+            'data'=> new TblNewsResource($news),
             'message'=> 'Success'
         ], 200);
     }

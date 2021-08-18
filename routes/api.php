@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-// use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MstrSatkerController;
 use App\Http\Controllers\MstrUkerController;
@@ -26,6 +26,7 @@ use App\Http\Controllers\TblNewsController;
 Route::group(['prefix'=>'v1'], function(){
     Route::post('/login', [UserController::class,'login']);
     Route::post('/register', [UserController::class,'register']);
+    Route::apiResource('/news', TblNewsController::class); //smentara untuk tes vue
     // Route::get('/logout', [UserController::class,'logout'])->middleware('auth:api');
     /* routes for accessing master satker only*/
     /* Route::apiResource('/satker', MstrSatkerController::class)->middleware('auth:api'); */
@@ -38,7 +39,7 @@ Route::group(['prefix'=>'v1'], function(){
             '/uker' => MstrUkerController::class,
             '/serviceType' => MstrServiceTypeController::class,
             '/faq' => TblFaqController::class,
-            '/news' => TblNewsController::class,
+            // '/news' => TblNewsController::class,
         ]);
         Route::get('/serviceOption/{type}', [MstrServiceTypeController::class, 'listByType']);
     });
